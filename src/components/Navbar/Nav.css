@@ -1,0 +1,10 @@
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Adjust if needed */
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+    background-color: transparent; /* Adjust the background color and opacity */
+    z-index: 1000; /* Ensure it stays on top of other elements */
+  }

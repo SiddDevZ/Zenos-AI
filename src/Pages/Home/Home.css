@@ -1,0 +1,18 @@
+
+
+.git-button{
+    transition: background-image 0.5s ease, transform 0.3s ease;
+}
+.git-button:hover{
+    background-color: rgb(24, 24, 26);
+    transform: scale(1.05);
+}
+body {
+
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+
+::-webkit-scrollbar {
+    display: none;
+  }

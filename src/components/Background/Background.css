@@ -1,0 +1,42 @@
+.background-parent {
+    position: absolute;
+    display: flex;
+    justify-content: center; 
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: -1;
+    transform: translate(-50%, -60%);
+}
+
+.bg-shape {
+    width: 80vw;
+    height: 450px;
+    border-radius: 9999px;
+    position: relative;
+    filter: blur(600px);
+    background-color: rgb(4, 8, 225);
+}
+
+@media (max-width: 900px) {
+    .bg-shape {
+        width: 90vw;
+        height: 550px;
+        filter: blur(300px);
+    }
+}
+
+@media (max-width: 768px) {
+    .bg-shape {
+        width: 90vw; /* Adjust width for smaller screens */
+        height: 500px; /* Adjust height for smaller screens */
+        filter: blur(300px); /* Adjust blur for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .bg-shape {
+        width: 100vw; /* Adjust width for very small screens */
+        height: 600px; /* Adjust height for very small screens */
+        filter: blur(300px); /* Adjust blur for very small screens */
+    }
+}
