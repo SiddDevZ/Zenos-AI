@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import './Sign.css'
+import '../../index.css';
 import Nav from '../../components/Navbar/Nav'
 import Background from '../../components/Background/Background'
 import Footer from '../../components/Footer/Footer';

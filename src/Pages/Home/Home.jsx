@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import '../../index.css';
 import './Home.css'
 import Nav from '../../components/Navbar/Nav'
 import AnimatedButton from '../../components/Animated-button/Button'
