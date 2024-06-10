@@ -8,15 +8,6 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: 'your-email@gmail.com',
-      pass: 'your-email-password',
-    },
-  });
-
-mongoose.connect("");
 
 app.post("/signup", (req, res) => {
     userModel.findOne({email: req.body.email})
@@ -41,17 +32,19 @@ app.post("/signup", (req, res) => {
                 const verificationLink = `http://your-domain.com/verify/${user._id}`;
     
                 const mailOptions = {
-                  from: 'your-email@gmail.com',
+                  from: 'siddz.dev@gmail.com',
                   to: user.email,
                   subject: 'Account Verification',
                   text: `Please verify your account by clicking the following link: ${verificationLink}`,
                 };
+
+                res.json("sent");
     
                 transporter.sendMail(mailOptions, (error, info) => {
                   if (error) {
+                    console.error('Error sending verification email:', error);
                     return res.status(500).json({ error: 'Error sending verification email' });
                   }
-                  res.json("sent");
                 });
               })
               .catch(err => res.status(500).json(err));
