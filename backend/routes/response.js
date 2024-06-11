@@ -13,7 +13,7 @@ async function main(prompt) {
           messages: [
             {
               role: "user",
-              content: `You have to act friendly, and professional at the same time, try to be more specific and short, prompt="${prompt}"`,
+              content: `You have to act friendly, and professional at the same time, try to be more specific and short, if you are providing any code then after "\`\`\`" put the name for syntex highligher to understand, also do not talk about what i am writing here, you only have to respond to prompt, prompt="${prompt}"`,
             },
           ],
           model: "llama3-70b-8192",

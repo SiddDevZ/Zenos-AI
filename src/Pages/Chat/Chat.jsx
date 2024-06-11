@@ -45,7 +45,12 @@ const Chat = () => {
         code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
-                <SyntaxHighlighter style={vscDarkPlus} language={match[1]} PreTag="div" {...props}>
+                <SyntaxHighlighter
+                    style={vscDarkPlus}
+                    language={match[1]}
+                    PreTag="div"
+                    {...props}
+                >
                     {String(children).replace(/\n$/, '')}
                 </SyntaxHighlighter>
             ) : (
@@ -87,7 +92,10 @@ const Chat = () => {
                                     <div className='space-y-1.5'>
                                         {/* <p className='text-sm md:text-base'>{messages[index + 1]}</p> */}
                                         <div className='text-sm md:text-base'>
-                                            <ReactMarkdown components={components} remarkPlugins={[remarkGfm]}>
+                                            <ReactMarkdown
+                                                components={components}
+                                                remarkPlugins={[remarkGfm]}
+                                            >
                                                 {messages[index + 1]}
                                             </ReactMarkdown>
                                         </div>
