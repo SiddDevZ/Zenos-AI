@@ -6,7 +6,7 @@ const config = require('../config.json');
 const signupRoute = require("./routes/signup");
 const signinRoute = require("./routes/signin");
 const verificationRoute = require("./routes/verify");
-
+const responseRoute = require("./routes/response");
 
 const app = express();
 app.use(express.json());
@@ -17,6 +17,7 @@ mongoose.connect(config.mongoUrl);
 app.use("/signup", signupRoute);
 app.use("/signin", signinRoute);
 app.use("/verify", verificationRoute);
+app.use("/response", responseRoute);
 
 
 app.listen(3001, () => {

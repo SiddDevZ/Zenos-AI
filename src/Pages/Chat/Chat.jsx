@@ -8,6 +8,11 @@ import axios from 'axios'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'remixicon/fonts/remixicon.css'
+import { get } from 'mongoose';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Chat = () => {
     const [prompt, setPrompt] = useState('');
@@ -15,12 +20,49 @@ const Chat = () => {
     const [messages, setMessages] = useState([])
     const [sent, setSent] = useState(false);
 
-    const handleSubmit = (e) => {
+    const getReply = async () => {
+        try{
+            await axios.post("http://localhost:3001/response", {prompt})
+            .then(result => {
+
+              if (result.data === "error"){
+                setReply("Error: Unable to connect to server, Please try again!");
+              } 
+              
+              else {
+                const reply = result.data.response;
+                console.log(reply)
+                setMessages((prevMessages) => [...prevMessages, prompt, reply]);
+              }
+            });
+            
+          } catch(e) {
+            console.log(e);
+          }
+    }
+
+    const components = {
+        code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || '');
+            return !inline && match ? (
+                <SyntaxHighlighter style={vscDarkPlus} language={match[1]} PreTag="div" {...props}>
+                    {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+            ) : (
+                <code className={className} {...props}>
+                    {children}
+                </code>
+            );
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSent(true);
-        setMessages((prevMessages) => [...prevMessages, prompt, prompt]);
+        await getReply();
+        //setMessages((prevMessages) => [...prevMessages, prompt, reply]);
         setPrompt('');
-        console.log(messages);
+        //console.log(messages);
     }
 
   return (
@@ -43,7 +85,12 @@ const Chat = () => {
                                 {/* this one is the reply */}
                                 <div className='relative max-w-[95%] md:max-w-[85%] border border-zinc-800 rounded-lg p-3 transition-all mr-auto bg-zinc-900'>
                                     <div className='space-y-1.5'>
-                                        <p className='text-sm md:text-base'>{messages[index + 1]}</p>
+                                        {/* <p className='text-sm md:text-base'>{messages[index + 1]}</p> */}
+                                        <div className='text-sm md:text-base'>
+                                            <ReactMarkdown components={components} remarkPlugins={[remarkGfm]}>
+                                                {messages[index + 1]}
+                                            </ReactMarkdown>
+                                        </div>
                                     </div>
                                 </div>
                                 <button className='cursor-pointer p-1.5 flex items-center w-fit transition -mt-2'>
