@@ -1,17 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Sign.css'
 import '../../index.css';
 import Nav from '../../components/Navbar/Nav'
 import Background from '../../components/Background/Background'
-import Footer from '../../components/Footer/Footer';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const parms = new URLSearchParams(location.search);
+
+    if (parms.get('verified') === 'true'){
+      toast.success('Verification Successful! 🎉', {
+        position: "bottom-right",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  }, [location])
 
   async function submit(e){
     e.preventDefault();
@@ -22,6 +42,32 @@ const SignIn = () => {
         console.log(result);
         if (result.data === "success"){
           navigate("/");
+        } else if (result.data === "incorrect"){
+          toast.error('Incorrect password! ', {
+            position: "bottom-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+        } else if (result.data === "notfound"){
+          toast.warn('No user exists with this email!', {
+            position: "bottom-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+        } else {
+          toast.error('Internal server error!', {position: "bottom-right", autoClose: 10000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "dark", transition: Bounce,});
         }
       });
       // navigate("/sign-in");
@@ -57,6 +103,7 @@ const SignIn = () => {
           </form>
           <p className='text-sm text-zinc-400 tracking-wide font-medium mt-2'>Don't have an account? <Link to="/sign-up" className='underline text-zinc-300 hover:text-zinc-100'>Sign Up Now</Link></p>
           <p className='text-xs text-zinc-500 w-full tracking-wider mt-2'>By continuing, you agree to our Terms of Service and Privacy Policy.</p>
+          <ToastContainer />
         </section>
       </main>
     </>

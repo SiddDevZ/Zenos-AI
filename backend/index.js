@@ -15,7 +15,7 @@ app.use(cors());
 mongoose.connect(config.mongoUrl);
 
 app.use("/signup", signupRoute);
-app.use("/signin", signupRoute);
+app.use("/signin", signinRoute);
 app.use("/verify", verificationRoute);
 
 

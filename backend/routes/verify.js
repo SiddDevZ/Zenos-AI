@@ -1,5 +1,6 @@
 const express = require("express");
 const userModel = require("../models/user");
+const config = require('../../config.json');
 
 const router = express.Router();
 
@@ -21,7 +22,9 @@ router.get("/:token", async (req, res) => {
     await user.save();
 
     // res.status(200).json({ message: "Account verified successfully" });
-    res.redirect('http://your-react-app-domain.com/home');
+    
+    res.redirect(`${config.frontend_url}/sign-in?verified=true`);
+
   } catch (error) {
     console.error("Error verifying account:", error);
     res.status(500).json({ error: "Internal server error" });
