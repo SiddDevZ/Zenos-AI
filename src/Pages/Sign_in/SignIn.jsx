@@ -7,6 +7,7 @@ import Nav from '../../components/Navbar/Nav'
 import Background from '../../components/Background/Background'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import config from '../../../config.json'
 
 const SignIn = () => {
 
@@ -37,7 +38,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try{
-      await axios.post("http://localhost:3001/signin", {email, password})
+      await axios.post(`${config.url}/signin`, {email, password})
       .then(result => {
         console.log(result);
         if (result.data === "success"){

@@ -13,6 +13,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import config from '../../../config.json'
 
 const Chat = () => {
     const [prompt, setPrompt] = useState('');
@@ -31,7 +32,7 @@ const Chat = () => {
     const getReply = async () => {
         try{
             setLoading(true);
-            await axios.post("http://localhost:3001/response", {prompt})
+            await axios.post(`${config.url}/response`, {prompt})
             .then(result => {
 
               if (result.data === "error"){
