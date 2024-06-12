@@ -16,6 +16,21 @@ const SignIn = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const token = localStorage.getItem('token');
+  if (token) {
+    const authenticate = async () => {
+      const result = await axios.post(`${config.url}/userauth`, { token });
+      if (result.data === 'notfound'){
+        localStorage.removeItem('token');
+        console.log('Token removed from local storage');
+        navigate('/sign-in');
+      } else {
+        navigate('/chat');
+      }
+    }
+    authenticate();
+  }
+
   useEffect(() => {
     const parms = new URLSearchParams(location.search);
 
