@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
             });
             newUser.save()
               .then(user => {
-                const verificationLink = `${config2.url}/verify/${verificationToken}`;
+                const verificationLink = `https://62e6cb2a-8fd7-421b-829f-844d35c13c9e-00-140ls7xaiggjt.pike.replit.dev:3001/verify/${verificationToken}`;
     
                 const mailOptions = {
                   from: 'siddz.dev@gmail.com',
