@@ -172,7 +172,7 @@ const Chat = () => {
                     <div className='rounded-lg relative flex flex-col gap-4 shadow-lg border border-zinc-800 transition-all duration-300 hover:border-zinc-500 bg-cover overflow-hidden col-span-1 p-0 bg-transparant' onClick={() => setPrompt('Write a 300 word essay about road accidents in pune and how to prevent them.')}>
                         <div className='flex cursor-pointer items-center justify-between p-4'>
                             <div className='space-y-1.5'>
-                                <p className='text-sm font-medium'>Write an Essay</p>
+                                <p className='text-sm font-medium'>Write an 300 word Essay</p>
                                 <p className='text-xs text-zinc-400'>About road accidents in Pune</p>
                             </div>
                         </div>
