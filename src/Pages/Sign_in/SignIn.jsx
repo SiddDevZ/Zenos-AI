@@ -40,10 +40,12 @@ const SignIn = () => {
     try{
       await axios.post(`${config.url}/signin`, {email, password})
       .then(result => {
-        console.log(result);
-        if (result.data === "success"){
+        console.log(result)
+        if (result.data[0] === "success"){
+          
+          localStorage.setItem('token', result.data[1]);
           navigate("/chat");
-        } else if (result.data === "incorrect"){
+        } else if (result.data[0] === "incorrect"){
           toast.error('Incorrect password! ', {
             position: "bottom-right",
             autoClose: 10000,
@@ -55,7 +57,7 @@ const SignIn = () => {
             theme: "dark",
             transition: Bounce,
           });
-        } else if (result.data === "notfound"){
+        } else if (result.data[0] === "notfound"){
           toast.warn('No user exists with this email!', {
             position: "bottom-right",
             autoClose: 10000,

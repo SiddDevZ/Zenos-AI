@@ -32,11 +32,13 @@ router.post("/", async (req, res) => {
                 .catch(err => console.error(err));
             }, 3600000); //   3600000
         } else {
-            const verificationToken = crypto.randomBytes(32).toString("hex");
+            const verificationToken = crypto.randomBytes(12).toString("hex");
+            const Token = crypto.randomBytes(24).toString("hex");
             const newUser = new userModel({
                 email: req.body.email,
                 password: req.body.password,
                 verificationToken: verificationToken,
+                Token: Token
             });
             newUser.save()
               .then(user => {

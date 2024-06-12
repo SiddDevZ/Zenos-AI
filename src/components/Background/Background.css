@@ -27,16 +27,16 @@
 
 @media (max-width: 768px) {
     .bg-shape {
-        width: 90vw; /* Adjust width for smaller screens */
-        height: 500px; /* Adjust height for smaller screens */
-        filter: blur(300px); /* Adjust blur for smaller screens */
+        width: 90vw;
+        height: 500px;
+        filter: blur(300px);
     }
 }
 
 @media (max-width: 480px) {
     .bg-shape {
-        width: 100vw; /* Adjust width for very small screens */
-        height: 600px; /* Adjust height for very small screens */
-        filter: blur(300px); /* Adjust blur for very small screens */
+        width: 100vw;
+        height: 600px;
+        filter: blur(300px);
     }
 }

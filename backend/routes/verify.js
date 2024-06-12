@@ -24,7 +24,7 @@ router.get("/:token", async (req, res) => {
 
     // res.status(200).json({ message: "Account verified successfully" });
     
-    res.redirect(`urlhere/sign-in?verified=true`);
+    res.redirect(`https://candlyn-ai.vercel.app/sign-in?verified=true`);
 
   } catch (error) {
     console.error("Error verifying account:", error);

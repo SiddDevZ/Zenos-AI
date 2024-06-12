@@ -6,17 +6,15 @@ const config = require('../../env.json');
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-    const {email, password} = req.body;
-    userModel.findOne({email: email})
+    const { token } = req.body;
+    console.log(token)
+    userModel.findOne({Token: token})
     .then(user => {
         if(user) {
-            if(user.password === password) {
-                res.json(["success", user.Token])
-            } else {
-                res.json(["incorrect", null])
-            }
+            res.json("success")
+
         } else {
-            res.json(["notfound", null])
+            res.json("notfound")
         }
     })
 })

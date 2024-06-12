@@ -14,8 +14,11 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import config from '../../../config.json'
+import UserAuth from '../../components/UserAuth/UserAuth'
 
 const Chat = () => {
+    UserAuth();
+
     const [prompt, setPrompt] = useState('');
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([]);
@@ -150,7 +153,7 @@ const Chat = () => {
             ) : (
             <section className='animate-in w-full flex flex-1 flex-col p-4 pb-24 '>
                 <div className='flex-1 flex flex-col items-center justify-center'>
-                    {/* <img src="" alt="Logo" width={130} height={130} /> */}
+                    <img src="logooo.png" alt="Logo" width={80} height={80} />
                     <h2 className='gradient-text text-center text-2xl md:text-4xl font-semibold'>How can I help you today?</h2>
                 </div>
                 <div className='animate-in w-full grid grid-cols-1 md:grid-cols-2 p-2 gap-3 md:gap-5'>
@@ -185,6 +188,7 @@ const Chat = () => {
                 </form>
             </section>
         </main>
+        <ToastContainer />
     </>
   )
 }
