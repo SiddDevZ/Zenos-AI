@@ -46,3 +46,6 @@
     border-color: transparent
   }
 }
+.message-container {
+  white-space: pre-line;
+}

@@ -35,7 +35,8 @@ const Chat = () => {
     const getReply = async () => {
         try{
             setLoading(true);
-            await axios.post(`${config.url}/response`, {prompt})
+            const token = localStorage.getItem('token');
+            await axios.post(`${config.url}/response`, {prompt, token})
             .then(result => {
 
               if (result.data === "error"){
@@ -44,8 +45,10 @@ const Chat = () => {
               } 
               
               else {
-                const reply = result.data.response;
-                console.log(reply)
+                let reply = result.data.response;
+                //console.log(reply)
+                //reply = reply.replace(/\n/g, '\n\n');
+                //console.log(reply)
                 setMessages((prevMessages) => [...prevMessages, reply]);
                 setLoading(false);
               }
@@ -120,7 +123,7 @@ const Chat = () => {
                                 </div>
                                 {/* this one is the reply */}
                                 <div className='animate-in relative max-w-[95%] md:max-w-[85%] border border-zinc-800 rounded-lg p-3 transition-all mr-auto bg-zinc-900'>
-                                    <div className='space-y-1.5'>
+                                    <div className='space-y-1.5 message-container'>
                                         {/* <p className='text-sm md:text-base'>{messages[index + 1]}</p> */}
                                         <div className='text-sm md:text-base'>
                                             {loading && index === messages.length - 1 ? 
