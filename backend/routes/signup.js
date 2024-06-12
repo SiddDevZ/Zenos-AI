@@ -2,16 +2,16 @@ const express = require("express");
 const userModel = require("../models/user");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
-require('dotenv').config();
-
+const config = require('../../env.json');
+const config2 = require('../../config.json');
 
 const router = express.Router();
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: config.EMAIL_USER,
+      pass: config.EMAIL_PASS,
     },
 });
 
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
                     }
                 })
                 .catch(err => console.error(err));
-            }, 20000); //   3600000
+            }, 3600000); //   3600000
         } else {
             const verificationToken = crypto.randomBytes(32).toString("hex");
             const newUser = new userModel({
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
             });
             newUser.save()
               .then(user => {
-                const verificationLink = `${process.env.FRONTEND_URL}/verify/${verificationToken}`;
+                const verificationLink = `${config2.url}/verify/${verificationToken}`;
     
                 const mailOptions = {
                   from: 'siddz.dev@gmail.com',

@@ -1,9 +1,9 @@
 const express = require("express");
-require('dotenv').config();
+const config = require('../../env.json');
 const Groq = require("groq-sdk");
 
 const router = express.Router();
-const groq = new Groq({ apiKey: process.env.API_KEY });
+const groq = new Groq({ apiKey: config.API_KEY });
 
 
 async function main(prompt) {
