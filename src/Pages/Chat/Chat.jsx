@@ -128,12 +128,12 @@ const Chat = () => {
                                                 <div className='spin'>
                                                     <i className="ri-loader-fill"></i>
                                                 </div>) : 
-                                                (<ReactMarkdown
+                                                (<div className=''><ReactMarkdown
                                                     components={components}
                                                     remarkPlugins={[remarkGfm]}
                                                 >
                                                     {messages[index + 1]}
-                                                </ReactMarkdown>)}
+                                                </ReactMarkdown></div>)}
                                         </div>
                                         <div ref={messagesEndRef} />
                                     </div>

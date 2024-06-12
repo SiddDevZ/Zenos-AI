@@ -47,6 +47,18 @@ const SignUp = () => {
               theme: "dark",
               transition: Bounce,
               });
+          } else if (result.data === "exists") {
+            toast.info('You already have an account, Please sign in!', {
+              position: "bottom-right",
+              autoClose: 10000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Bounce,
+            });
           }
         });
     }  catch(e) {

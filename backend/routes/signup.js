@@ -19,7 +19,16 @@ router.post("/", async (req, res) => {
     userModel.findOne({email: req.body.email})
     .then(user => {
         if (user) {
-            res.json("alreadyexists");
+            userModel.findOne({ email: req.body.email })
+            .then(user => {
+                if (user && user.verified) {
+                  res.json("exists");
+                } else {
+                  if (user){
+                    res.json("alreadyexists");
+                  }
+                }
+            })
             setTimeout(() => {
                 userModel.findOne({ email: req.body.email })
                 .then(user => {

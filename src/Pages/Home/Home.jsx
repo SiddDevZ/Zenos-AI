@@ -44,8 +44,8 @@ const Home = () => {
         <h1 className='my-3 text-[2.5rem] md:text-5xl lg:text-6xl xl:text-7xl md:leading-[3.8rem] lg:leading-[4.8rem] text-center font-semibold tracking-wide gradient-text animate-in'>AI-Driven Chat, Redefined</h1>
         <p className='my-3 gradient-text md:text-lg tracking-wide max-w-2xl text-center animate-in'>Experience Seamless, Intelligent Conversations Like Never Before with {config.name}'s Cutting-Edge Language Model Technology</p>
         <div className='w-full flex items-center justify-center gap-4 mt-4 animate-in'>
-            <Link className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium px-[1.20rem] py-3 gradient-button' to="/sign-up">Get Started</Link>
-            <a className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium px-[1.25rem] py-3 bg-github git-button' href="https://github.com/SiddDevZ/Candlyn-AI"><i className="ri-github-line mr-2 h-4 w-4"></i><span>GitHub</span></a>
+            <Link className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium px-[1.20rem] py-3 gradient-button' to="/chat">Get Started</Link>
+            <a className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium px-[1.25rem] py-3 bg-github git-button' href="https://github.com/SiddDevZ/Candlyn-AI" target="_blank"><i className="ri-github-line mr-2 h-4 w-4"></i><span>GitHub</span></a>
         </div>
       </section>
 
