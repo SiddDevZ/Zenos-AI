@@ -9,19 +9,9 @@ const groq = new Groq({ apiKey: config.API_KEY });
 
 async function main(prompt, token) {
 
-  const auth = false
+  const auth = await userModel.findOne({ Token: token });
   
-  userModel.findOne({Token: token})
-    .then(user => {
-        if(user) {
-            auth = true;
-
-        } else {
-            auth = false;
-        }
-    });
-  
-  if (auth === true) {
+  if (auth) {
     try {
       const completion = await groq.chat.completions
       .create({

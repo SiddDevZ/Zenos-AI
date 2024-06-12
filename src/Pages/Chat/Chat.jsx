@@ -36,6 +36,7 @@ const Chat = () => {
         try{
             setLoading(true);
             const token = localStorage.getItem('token');
+            console.log(token);
             await axios.post(`${config.url}/response`, {prompt, token})
             .then(result => {
 
