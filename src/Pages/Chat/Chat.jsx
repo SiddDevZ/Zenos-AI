@@ -37,7 +37,7 @@ const Chat = () => {
             setLoading(true);
             const token = localStorage.getItem('token');
             console.log(token);
-            await axios.post(`${config.url}/response`, {prompt, token})
+            await axios.post(`${config.url}/response`, {prompt})
             .then(result => {
 
               if (result.data === "error"){
