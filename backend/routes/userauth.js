@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     const { token } = req.body;
-    console.log(token)
+    
     userModel.findOne({Token: token})
     .then(user => {
         if(user) {
