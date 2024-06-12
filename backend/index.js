@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userModel = require("./models/user");
-const config = require('../config.json');
+require('dotenv').config();
 const signupRoute = require("./routes/signup");
 const signinRoute = require("./routes/signin");
 const verificationRoute = require("./routes/verify");
@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(config.mongoUrl);
+mongoose.connect(process.env.MONGO_URL);
 
 app.use("/signup", signupRoute);
 app.use("/signin", signinRoute);

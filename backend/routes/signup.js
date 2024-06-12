@@ -2,7 +2,7 @@ const express = require("express");
 const userModel = require("../models/user");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
-const config = require('../../config.json');
+require('dotenv').config();
 
 
 const router = express.Router();
@@ -10,8 +10,8 @@ const router = express.Router();
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: config.email.user,
-      pass: config.email.pass,
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
 });
 
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
             });
             newUser.save()
               .then(user => {
-                const verificationLink = `http://localhost:3001/verify/${verificationToken}`;
+                const verificationLink = `${process.env.FRONTEND_URL}/verify/${verificationToken}`;
     
                 const mailOptions = {
                   from: 'siddz.dev@gmail.com',

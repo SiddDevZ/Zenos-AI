@@ -41,7 +41,7 @@ const SignIn = () => {
       .then(result => {
         console.log(result);
         if (result.data === "success"){
-          navigate("/");
+          navigate("/chat");
         } else if (result.data === "incorrect"){
           toast.error('Incorrect password! ', {
             position: "bottom-right",

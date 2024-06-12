@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # secret files
-config.json
+.env

@@ -1,6 +1,6 @@
 const express = require("express");
 const userModel = require("../models/user");
-const config = require('../../config.json');
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.get("/:token", async (req, res) => {
 
     // res.status(200).json({ message: "Account verified successfully" });
     
-    res.redirect(`${config.frontend_url}/sign-in?verified=true`);
+    res.redirect(`${process.env.FRONTEND_URL}/sign-in?verified=true`);
 
   } catch (error) {
     console.error("Error verifying account:", error);
