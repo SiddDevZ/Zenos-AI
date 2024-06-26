@@ -53,7 +53,10 @@ const SignIn = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`${config.url}/signin`, {email, password})
+      await axios.post(`${config.url}/signin`, {email, password}, {
+        headers: {
+            'Content-Type': 'application/json'
+        }})
       .then(result => {
         console.log(result)
         if (result.data[0] === "success"){
