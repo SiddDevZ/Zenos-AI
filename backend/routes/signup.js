@@ -29,17 +29,17 @@ router.post("/", async (req, res) => {
                   }
                 }
             })
-            setTimeout(() => {
-                userModel.findOne({ email: req.body.email })
-                .then(user => {
-                    if (user && !user.verified) {
-                        userModel.deleteOne({ email: req.body.email })
-                        .then(() => console.log("Unregistered user deleted ", user))
-                        .catch(err => console.error(err));
-                    }
-                })
-                .catch(err => console.error(err));
-            }, 3600000); //   3600000
+            //setTimeout(() => {
+            //    userModel.findOne({ email: req.body.email })
+            //    .then(user => {
+            //        if (user && !user.verified) {
+            //            userModel.deleteOne({ email: req.body.email })
+            //            .then(() => console.log("Unregistered user deleted ", user))
+            //            .catch(err => console.error(err));
+            //        }
+            //    })
+            //    .catch(err => console.error(err));
+            //}, 3600000); //   3600000
         } else {
             const verificationToken = crypto.randomBytes(12).toString("hex");
             const Token = crypto.randomBytes(24).toString("hex");
