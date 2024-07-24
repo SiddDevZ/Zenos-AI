@@ -53,7 +53,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`${config.url}/signin`, {email, password}, {
+      await axios.post(`/api/signin`, {email, password}, {
         headers: {
             'Content-Type': 'application/json'
         }})
