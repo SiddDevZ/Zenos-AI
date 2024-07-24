@@ -53,17 +53,20 @@ const SignIn = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`/api/signin`, {email, password}, {
+      fetch('/api/signin', {
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        }})
-      .then(result => {
-        console.log(result)
-        if (result.data[0] === "success"){
-          
-          localStorage.setItem('token', result.data[1]);
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email, password})
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data[0] === "success") {
+          localStorage.setItem('token', data[1]);
           navigate("/chat");
-        } else if (result.data[0] === "incorrect"){
+        } else if (data[0] === "incorrect") {
           toast.error('Incorrect password! ', {
             position: "bottom-right",
             autoClose: 10000,
@@ -75,7 +78,7 @@ const SignIn = () => {
             theme: "dark",
             transition: Bounce,
           });
-        } else if (result.data[0] === "notfound"){
+        } else if (data[0] === "notfound") {
           toast.warn('No user exists with this email!', {
             position: "bottom-right",
             autoClose: 10000,
@@ -88,8 +91,32 @@ const SignIn = () => {
             transition: Bounce,
           });
         } else {
-          toast.error('Internal server error!', {position: "bottom-right", autoClose: 10000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "dark", transition: Bounce,});
+          toast.error('Internal server error!', {
+            position: "bottom-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
         }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        toast.error('An error occurred while processing your request.', {
+          position: "bottom-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
       });
       // navigate("/sign-in");
       
