@@ -15,6 +15,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import config from '../../../config.json'
 import UserAuth from '../../components/UserAuth/UserAuth'
+import postWithFallback from '../../components/PostFallback/PostFallback'
 
 const Chat = () => {
     UserAuth();
@@ -37,7 +38,7 @@ const Chat = () => {
             setLoading(true);
             const token = localStorage.getItem('token');
             console.log(token);
-            await axios.post(`${config.url}/response`, {prompt})
+            await postWithFallback("response", { prompt })
             .then(result => {
 
               if (result.data === "error"){

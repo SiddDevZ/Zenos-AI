@@ -9,6 +9,7 @@ import axios from 'axios'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import config from '../../../config.json'
+import postWithFallback from '../../components/PostFallback/PostFallback'
 
 const SignUp = () => {
 
@@ -20,7 +21,8 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`${config.url}/signup`, { email, password })
+      // await axios.post(`${config.url}/signup`, { email, password })
+      await postWithFallback("signup", { email, password })
         .then(result => {
           console.log(result);
           if (result.data === "alreadyexists") {

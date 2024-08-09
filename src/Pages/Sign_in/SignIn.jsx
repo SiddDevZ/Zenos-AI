@@ -8,6 +8,7 @@ import Background from '../../components/Background/Background'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import config from '../../../config.json'
+import postWithFallback from '../../components/PostFallback/PostFallback'
 
 const SignIn = () => {
 
@@ -19,7 +20,8 @@ const SignIn = () => {
   const token = localStorage.getItem('token');
   if (token) {
     const authenticate = async () => {
-      const result = await axios.post(`${config.url}/userauth`, { token });
+      // const result = await axios.post(`${config.url}/userauth`, { token });
+      const result = await postWithFallback("userauth", { token });
       if (result.data === 'notfound'){
         localStorage.removeItem('token');
         console.log('Token removed from local storage');
@@ -53,10 +55,11 @@ const SignIn = () => {
     e.preventDefault();
 
     try{
-      await axios.post(`/api/signin`, {email, password}, {
-        headers: {
-            'Content-Type': 'application/json'
-        }})
+      // await axios.post(`/api/signin`, {email, password}, {
+      //   headers: {
+      //       'Content-Type': 'application/json'
+      //   }})
+      await postWithFallback("signin", { email, password })
       .then(result => {
         console.log(result)
         if (result.data[0] === "success"){
