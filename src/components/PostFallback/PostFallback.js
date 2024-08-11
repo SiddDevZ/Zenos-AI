@@ -18,4 +18,5 @@ const postWithFallback = async (endpoint, data) => {
     throw new Error("All API requests failed");
 };
 
+export default postWithFallback;
 // await postWithFallback("response", { prompt });
