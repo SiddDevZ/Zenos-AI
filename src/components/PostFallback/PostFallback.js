@@ -9,7 +9,7 @@ const postWithFallback = async (endpoint, data) => {
     ];
     for (const url of urls) {
         try {
-            const result = await axios.post(url, data);
+            const result = await axios.post(url, data, { timeout: 2500 });
             return result;
         } catch (error) {
             console.log(`Failed to fetch from ${url}: `, error.message);
