@@ -15,11 +15,11 @@ app.use(cors());
 
 mongoose.connect(config.MONGO_URL);
 
-app.use("/signup", signupRoute);
-app.use("/signin", signinRoute);
-app.use("/verify", verificationRoute);
+// app.use("/signup", signupRoute);
+// app.use("/signin", signinRoute);
+// app.use("/verify", verificationRoute);
 app.use("/response", responseRoute);
-app.use("/userauth", userAuthRoute);
+// app.use("/userauth", userAuthRoute);
 
 app.listen(3001, () => {
     console.log("Server is running on port 3001")

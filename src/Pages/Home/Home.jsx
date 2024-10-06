@@ -44,7 +44,7 @@ const Home = () => {
         <h1 className='my-3 text-[2.5rem] md:text-5xl lg:text-6xl xl:text-7xl md:leading-[3.8rem] lg:leading-[4.8rem] text-center font-semibold tracking-wide gradient-text animate-in'>AI-Driven Chat, Redefined</h1>
         <p className='my-3 gradient-text md:text-lg tracking-wide max-w-2xl text-center animate-in'>Experience Seamless, Intelligent Conversations Like Never Before with {config.name}'s Cutting-Edge Language Model Technology</p>
         <div className='w-full flex items-center justify-center gap-4 mt-4 animate-in'>
-            <Link className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium px-[1.20rem] py-3 gradient-button' to="/sign-up">Get Started</Link>
+            <Link className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium px-[1.20rem] py-3 gradient-button' to="/chat">Chat With Me</Link>
             <a className='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium px-[1.25rem] py-3 bg-github git-button' href="https://github.com/SiddDevZ/Candlyn-AI" target="_blank"><i className="ri-github-line mr-2 h-4 w-4"></i><span>GitHub</span></a>
         </div>
       </section>
@@ -52,7 +52,7 @@ const Home = () => {
       <section className='animate-in w-full'>
         <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} className='glow-container rounded-lg overflow-hidden mx-auto w-fit border border-zinc-900 max-w-[85%] group'>
             <div className='glow' style={glowStyle}></div>
-            <img  src="https://i.imgur.com/tCsbnKt.png" alt="" width={1000} height={500}/>
+            <img  src="/ss.png" alt="" width={1000} height={500}/>
         </div>
       </section>
 

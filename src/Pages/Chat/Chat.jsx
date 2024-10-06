@@ -4,22 +4,22 @@ import '../../index.css';
 import './Chat.css';
 import Nav from '../../components/Navbar/Nav'
 import Background from '../../components/Background/Background'
-import axios from 'axios'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'remixicon/fonts/remixicon.css'
-import { get } from 'mongoose';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import config from '../../../config.json'
-import UserAuth from '../../components/UserAuth/UserAuth'
-import postWithFallback from '../../components/PostFallback/PostFallback'
+import axios from 'axios';
+
+// Function to decode the API key
+const decodeApiKey = (encodedKey) => {
+    return atob(encodedKey);
+};
 
 const Chat = () => {
-    UserAuth();
-
+    
     const [prompt, setPrompt] = useState('');
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([]);
@@ -28,40 +28,51 @@ const Chat = () => {
     const messagesEndRef = useRef(null);
     const [copied, setCopied] = useState(false);
     const [copyindex, setCopyIndex] = useState(-1);
-
+    
+    const decodedApiKey = decodeApiKey(import.meta.env.VITE_LOL);
+    
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
-
+    
     const getReply = async () => {
-        try{
+        try {
             setLoading(true);
-            const token = localStorage.getItem('token');
-            console.log(token);
-            await postWithFallback("response", { prompt })
-            .then(result => {
-
-              if (result.data === "error"){
+            const response = await axios.post(
+                'https://api.groq.com/openai/v1/chat/completions',
+                {
+                    messages: [
+                        {
+                            role: "user",
+                            content: `You have to act friendly, and professional at the same time, try to be more specific and short, IF ONLY IF you were originally going to provide then any code then after "\`\`\`" put the name or short name (whichever it understands) for syntex highligher to understand, also do not talk about what i am writing here, be straight to the point, dont hi hello or anything, you only have to respond to prompt, prompt="${prompt}"`,
+                        },
+                    ],
+                    model: "llama3-70b-8192",
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${decodedApiKey}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+    
+            const reply = response.data.choices[0]?.message?.content || "";
+            
+            if (reply === "error") {
                 setMessages((prevMessages) => [...prevMessages, "Error: Unable to connect to server, Please try again!"]);
-                setLoading(false);
-              } 
-              
-              else {
-                let reply = result.data.response;
-                //console.log(reply)
-                //reply = reply.replace(/\n/g, '\n\n');
-                //console.log(reply)
+            } else {
                 setMessages((prevMessages) => [...prevMessages, reply]);
-                setLoading(false);
-              }
-            });
-
-          } catch(e) {
+            }
+        } catch (e) {
             console.log(e);
             setMessages((prevMessages) => [...prevMessages, "Error: Unable to connect to server, Please try again!"]);
+        } finally {
             setLoading(false);
-          }
+        }
     }
+    
+    // ... (rest of the code remains the same)
 
     const components = {
         code({ node, inline, className, children, ...props }) {

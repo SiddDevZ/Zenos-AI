@@ -1,7 +1,6 @@
 {
     "rewrites": [
         { "source": "/api1/:path*", "destination": "http://dono-01.danbot.host:9135/:path*" },
-        { "source": "/api2/:path*", "destination": "http://pnode3.danbot.host:8356/:path*" },
         { "source": "/(.*)", "destination": "/index.html" }
     ]
 }
