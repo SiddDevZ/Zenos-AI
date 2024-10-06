@@ -52,7 +52,7 @@ const Home = () => {
       <section className='animate-in w-full'>
         <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} className='glow-container rounded-lg overflow-hidden mx-auto w-fit border border-zinc-900 max-w-[85%] group'>
             <div className='glow' style={glowStyle}></div>
-            <img  src="/ss.png" alt="" width={1000} height={500}/>
+            <img  src="/ss.webp" alt="" width={1000} height={500}/>
         </div>
       </section>
 
